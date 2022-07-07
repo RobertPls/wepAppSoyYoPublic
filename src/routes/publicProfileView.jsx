@@ -17,6 +17,9 @@ import logo from "../assets/img/logo-mt-corp.svg";
 import { ListSecondaryLink } from "../components/listSecondaryLink";
 import { ListPrimaryLink } from "../components/listPrimaryLink";
 
+
+import { Contact } from "../components/contact"; 
+
 export default function PublicProfileView() {
   const params = useParams(); //permite tener info de las URL, es decir las variables que se pasaron por la direccion del enlace
   const [username, setUsername] = useState("");
@@ -80,6 +83,7 @@ export default function PublicProfileView() {
       <Row className={style.profileContainer}>
         <div className={style.imageContainer}>
           <img
+            id="img-profile"
             className={style.imageAvatar}
             src={url}
             alt={displayName}
@@ -97,14 +101,7 @@ export default function PublicProfileView() {
               Modo Offline
             </div>
             <div>
-              <a
-                rel="nofollow"
-                href="https://taggo.one/EIIYS7SIF/vcard.vcf"
-                target="_top"
-                className={style.saveContainer}
-              >
-                <span>Guardar Contacto</span>
-              </a>
+              <Contact url={url}></Contact>
             </div>
             <div className={style.shareContainer}>
               <RiShareForwardLine className={style.shareIcon} />
