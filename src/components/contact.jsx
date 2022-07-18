@@ -14,16 +14,14 @@ export const Contact = ({
 
 async function createContact(){
   var myVCard = new VCard();
-  name = "Matheus Loerte"
+  // name = "Matheus Loerte"
   email="matheus.loerte@mtcorplatam.com"
   phone = "+55 13 99730-7397"
   address = "Avenida Irala, 462-Santa Cruz de La Sierra-Bolivia"
   company = "Gerente de Proyectos"
   website = "http://taggo.one/matheusloerte"
 
-  console.log(url)
   let image64 = await getBase64Image(url)
-  console.log(image64)
 
   myVCard.addName(name);
   myVCard.addEmail(email,'PREF;WORK');

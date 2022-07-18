@@ -30,6 +30,7 @@ export default function PublicProfileView() {
   const userRef = useRef(null);
   const [url, setUrl] = useState("");
   const [state, setState] = useState(0);
+  const myCanvasProfile = useRef();
 
   useEffect(() => {
     setState(1);
@@ -53,6 +54,9 @@ export default function PublicProfileView() {
           userRef.current = userInfo.profileInfo;
 
           setUrl(url);
+
+          await getCanvasProfile(url)
+          
           // setState(8);
         } catch (error) {
           console.log(error);
@@ -62,6 +66,17 @@ export default function PublicProfileView() {
       }
     } catch (error) {}
   }
+  async function getCanvasProfile(url){
+    const context = myCanvasProfile.current.getContext("2d");
+    const image = new Image();
+    image.src = url;
+    image.onload = () => {
+      context.canvas.width = image.width;
+      context.canvas.height = image.height;
+      context.drawImage(image, 0, 0);
+    };
+  }
+
 
   function handleOnLoadImage() {
       setState(8);
@@ -82,12 +97,7 @@ export default function PublicProfileView() {
       <div className={style.backRectangle}></div>
       <Row className={style.profileContainer}>
         <div className={style.imageContainer}>
-          <img
-            id="img-profile"
-            className={style.imageAvatar}
-            src={url}
-            alt={displayName}
-          />
+          <canvas className={style.imageAvatar} ref={myCanvasProfile} id="canvas-profile"></canvas>
         </div>
         <div className={style.afterImageContainer}>
           <div className={style.infoContainer}>
@@ -101,7 +111,7 @@ export default function PublicProfileView() {
               Modo Offline
             </div>
             <div>
-              <Contact url={url}></Contact>
+              <Contact url={url} name={username}></Contact>
             </div>
             <div className={style.shareContainer}>
               <RiShareForwardLine className={style.shareIcon} />
