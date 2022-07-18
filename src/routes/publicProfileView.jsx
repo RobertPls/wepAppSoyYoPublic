@@ -17,12 +17,15 @@ import { RiShareForwardLine } from "react-icons/ri";
 import logo from "../assets/img/logo-mt-corp.svg";
 import { ListSecondaryLink } from "../components/listSecondaryLink";
 import { ListPrimaryLink } from "../components/listPrimaryLink";
+import { Contact } from "../components/contact"
 
 export default function PublicProfileView() {
   const params = useParams(); //permite tener info de las URL, es decir las variables que se pasaron por la direccion del enlace
   const [username, setUsername] = useState("");
   const [displayName, setDisplayName] = useState("");
   const [career, setCareer] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState(0);
 
   const [linkList, setLinkList] = useState([]);
   const userRef = useRef(null);
@@ -33,6 +36,7 @@ export default function PublicProfileView() {
   const [bg, setBg] = useState("first");
   const [bgHover, setBgHover] = useState("firstHover");
   
+  const myCanvasProfile = useRef();
 
   useEffect(() => {
     setState(1);
@@ -49,6 +53,8 @@ export default function PublicProfileView() {
           setUsername(userInfo.profileInfo.username);
           setDisplayName(userInfo.profileInfo.displayName);
           setCareer(userInfo.profileInfo.career);
+          setEmail(userInfo.profileInfo.email);
+          setPhone(userInfo.profileInfo.personalPhone);
           console.log(userInfo.profileInfo.theme);
           setTheme(userInfo.profileInfo.theme);
           console.log(theme);
@@ -59,6 +65,7 @@ export default function PublicProfileView() {
           );
           userRef.current = userInfo.profileInfo;
           setUrl(url);
+          await getCanvasProfile(url)
           // setState(8);
         } catch (error) {
           console.log(error);
@@ -67,6 +74,16 @@ export default function PublicProfileView() {
         setState(7);
       }
     } catch (error) {}
+  }
+  async function getCanvasProfile(url){
+    const context = myCanvasProfile.current.getContext("2d");
+    const image = new Image();
+    image.src = url;
+    image.onload = () => {
+      context.canvas.width = image.width;
+      context.canvas.height = image.height;
+      context.drawImage(image, 0, 0);
+    };
   }
 
   function handleOnLoadImage() {
@@ -125,11 +142,7 @@ function handleTheme(theme){
       <div className={`${style.backRectangle} ${bg}`}></div>
       <Row className={style.profileContainer}>
         <div className={style.imageContainer}>
-          <img
-            className={style.imageAvatar}
-            src={url}
-            alt={displayName}
-          />
+          <canvas className={style.imageAvatar} ref={myCanvasProfile} id="canvas-profile"></canvas>
         </div>
         <div className={style.afterImageContainer}>
           <div className={style.infoContainer}>
@@ -144,8 +157,8 @@ function handleTheme(theme){
                 Modo Offline
               </a>
             {/* </div> */}
-            <div>
-              <a
+            <div  className={`${style.saveContainer} ${bg} ${bgHover}`}>
+              {/* <a
                 rel="nofollow"
                 href="https://taggo.one/EIIYS7SIF/vcard.vcf"
                 target="_top"
@@ -153,7 +166,8 @@ function handleTheme(theme){
                 {`${style.saveContainer} ${bg} ${bgHover}`}
               >
                 <span>Guardar Contacto</span>
-              </a>
+              </a> */}
+              <Contact url={url} name={displayName} email={email} phone={phone} career={career}></Contact>
             </div>
             <div className={style.shareContainer}>
               <RiShareForwardLine className={style.shareIcon} />

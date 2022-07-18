@@ -123,12 +123,12 @@
   font-size: 15px;
   border: 0;
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
-  width: 100%;
   outline: none;
   margin-bottom: 10px;
   background: #3e0752;
 }
 .saveContainer:hover {
+  cursor:pointer;
   color: #fff;
   background: rgba(62, 7, 82, 0.9);
 }
