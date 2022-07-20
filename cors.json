@@ -1,0 +1,7 @@
+[
+    {
+      "origin": ["https://soyyo.digital"],
+      "method": ["GET"],
+      "maxAgeSeconds": 3600
+    }
+  ]
