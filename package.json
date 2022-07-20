@@ -17,7 +17,11 @@
     "react-dom": "^18.1.0",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
+<<<<<<< HEAD
     "react-scripts": "5.0.1",
+=======
+    "react-scripts": "^5.0.1",
+>>>>>>> a3ed858372f549ad58ccbedb3b371fc4a2dd74e1
     "vcard-creator": "^0.4.2",
     "web-vitals": "^2.1.4"
   },

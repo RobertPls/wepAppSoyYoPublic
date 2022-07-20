@@ -19,6 +19,9 @@ import { ListSecondaryLink } from "../components/listSecondaryLink";
 import { ListPrimaryLink } from "../components/listPrimaryLink";
 import { Contact } from "../components/contact"
 
+
+import { Contact } from "../components/contact"; 
+
 export default function PublicProfileView() {
   const params = useParams(); //permite tener info de las URL, es decir las variables que se pasaron por la direccion del enlace
   const [username, setUsername] = useState("");
@@ -31,6 +34,7 @@ export default function PublicProfileView() {
   const userRef = useRef(null);
   const [url, setUrl] = useState("");
   const [state, setState] = useState(0);
+  const myCanvasProfile = useRef();
 
   const [theme, setTheme] = useState("default");
   const [bg, setBg] = useState("first");
@@ -65,7 +69,13 @@ export default function PublicProfileView() {
           );
           userRef.current = userInfo.profileInfo;
           setUrl(url);
+<<<<<<< HEAD
           await getCanvasProfile(url)
+=======
+
+          await getCanvasProfile(url)
+          
+>>>>>>> a3ed858372f549ad58ccbedb3b371fc4a2dd74e1
           // setState(8);
         } catch (error) {
           console.log(error);
@@ -85,6 +95,10 @@ export default function PublicProfileView() {
       context.drawImage(image, 0, 0);
     };
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a3ed858372f549ad58ccbedb3b371fc4a2dd74e1
 
   function handleOnLoadImage() {
       setState(8);
@@ -150,6 +164,7 @@ function handleTheme(theme){
             <div className={style.infoCareer}>{career}</div>
           </div>
           <div className={style.othersContainer}>
+<<<<<<< HEAD
             {/* <div className={style.qrContainer}> */}
             <a className={style.qrContainer}  href={qrComponent} download="QRCode">
                 <MdQrCode2 className={style.qrIcon} />
@@ -168,6 +183,15 @@ function handleTheme(theme){
                 <span>Guardar Contacto</span>
               </a> */}
               <Contact url={url} name={displayName} email={email} phone={phone} career={career}></Contact>
+=======
+            <div className={style.qrContainer}>
+              <MdQrCode2 className={style.qrIcon} />
+              <br />
+              Modo Offline
+            </div>
+            <div>
+              <Contact url={url} name={username}></Contact>
+>>>>>>> a3ed858372f549ad58ccbedb3b371fc4a2dd74e1
             </div>
             <div className={style.shareContainer}>
               <RiShareForwardLine className={style.shareIcon} />

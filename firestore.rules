@@ -1,6 +1,10 @@
 rules_version = "2";
 service cloud.firestore{
     match /databases/{database}/documents {
+<<<<<<< HEAD
+=======
+
+>>>>>>> a3ed858372f549ad58ccbedb3b371fc4a2dd74e1
         match /{document=**}{
             allow read: if true
             allow write: if false;
